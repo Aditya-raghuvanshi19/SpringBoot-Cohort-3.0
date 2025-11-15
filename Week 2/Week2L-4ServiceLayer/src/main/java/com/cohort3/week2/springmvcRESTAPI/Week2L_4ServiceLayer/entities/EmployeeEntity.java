@@ -1,5 +1,6 @@
 package com.cohort3.week2.springmvcRESTAPI.Week2L_4ServiceLayer.entities;
 
+import com.fasterxml.jackson.annotation.JsonProperty;
 import jakarta.persistence.*;
 import lombok.AllArgsConstructor;
 import lombok.Getter;
@@ -22,6 +23,7 @@ public class EmployeeEntity {
     private String email;
     private Integer age;
     private LocalDate dateOfJoining;
+    @JsonProperty("isActive")
     private Boolean isActive;
 }
 // as here we use lombok getter and setter and it works well when we directly take this entity from user or return this entity directly without use of DTO
