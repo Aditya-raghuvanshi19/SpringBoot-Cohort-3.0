@@ -3,6 +3,7 @@ package com.cohort3.week2.springmvcRESTAPI.Week2L_4ServiceLayer.services;
 import com.cohort3.week2.springmvcRESTAPI.Week2L_4ServiceLayer.dto.AddEmployeeDTO;
 import com.cohort3.week2.springmvcRESTAPI.Week2L_4ServiceLayer.dto.EmployeeDTO;
 import com.cohort3.week2.springmvcRESTAPI.Week2L_4ServiceLayer.entities.EmployeeEntity;
+import com.cohort3.week2.springmvcRESTAPI.Week2L_4ServiceLayer.exceptions.ResourceNotFoundException;
 import com.cohort3.week2.springmvcRESTAPI.Week2L_4ServiceLayer.repositories.EmployeeRepository;
 import jakarta.transaction.Transactional;
 import org.modelmapper.ModelMapper;
@@ -76,8 +77,11 @@ public class EmployeeServices {
 
     public EmployeeDTO updateEmployeeById(Long employeeId, EmployeeDTO employeeDTO) {
 
-        boolean exist = isExistsByEmployeeId(employeeId);
-        if(!exist)return null;
+//        boolean exist = isExistsByEmployeeId(employeeId);
+//        //if(!exist)return null;
+//        if(!exist) throw new ResourceNotFoundException("Employee not found with the id: " + employeeId);
+
+        isExistsByEmployeeId(employeeId);
 
         EmployeeEntity employeeEntity = modelMapper.map(employeeDTO, EmployeeEntity.class);
         employeeEntity.setId(employeeId);
@@ -119,20 +123,29 @@ public class EmployeeServices {
 //    Both are symptoms of the same mapping problem: your DTO doesn't carry the id (or has null id) and ModelMapper is copying that null into the existing EmployeeEntity, changing its identifier — Hibernate forbids changing the identifier of a managed entity.
 
     public boolean deleteEmployeeById(Long employeeID) {
-        boolean exist = isExistsByEmployeeId(employeeID);
-        if(!exist)return false;
+
+//        boolean exist = isExistsByEmployeeId(employeeID);
+//       //if(!exist)return false;
+//        if(!exist) throw new ResourceNotFoundException("Employee not found with the id: " + employeeID);
+
+        isExistsByEmployeeId(employeeID);
         employeeRepository.deleteById(employeeID);
         return  true;
     }
 
     public boolean isExistsByEmployeeId(Long employeeId){
-        return employeeRepository.existsById(employeeId);
+        boolean exist = employeeRepository.existsById(employeeId);
+        if(!exist) throw new ResourceNotFoundException("Employee not found with the id: " + employeeId);
+        return true;
     }
 
     public EmployeeDTO updatePartialEmployeeById(Long employeeID, Map<String, Object> updates) {
-        boolean exist = isExistsByEmployeeId(employeeID);
-        if(!exist)return null;
 
+//        boolean exist = isExistsByEmployeeId(employeeID);
+//        //if(!exist)return null;
+//        if(!exist) throw new ResourceNotFoundException("Employee not found with the id: " + employeeID);
+
+        isExistsByEmployeeId(employeeID);
         EmployeeEntity employeeEntity=employeeRepository.findById(employeeID).get();
 
         updates.forEach((field , value) -> {

@@ -3,16 +3,19 @@ package com.cohort3.week2.springmvcRESTAPI.Week2L_4ServiceLayer.controllers;
 import com.cohort3.week2.springmvcRESTAPI.Week2L_4ServiceLayer.dto.AddEmployeeDTO;
 import com.cohort3.week2.springmvcRESTAPI.Week2L_4ServiceLayer.dto.EmployeeDTO;
 import com.cohort3.week2.springmvcRESTAPI.Week2L_4ServiceLayer.entities.EmployeeEntity;
+import com.cohort3.week2.springmvcRESTAPI.Week2L_4ServiceLayer.exceptions.ResourceNotFoundException;
 import com.cohort3.week2.springmvcRESTAPI.Week2L_4ServiceLayer.services.EmployeeServices;
 
 import jakarta.validation.Valid;
 import lombok.RequiredArgsConstructor;
 import org.springframework.http.HttpStatus;
+import org.springframework.http.HttpStatusCode;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
 import java.util.Map;
+import java.util.NoSuchElementException;
 import java.util.Optional;
 
 @RestController
@@ -36,12 +39,29 @@ public class EmployeeController {
 //    public EmployeeDTO getEmployeeByID(@PathVariable(name = "employeeID") Long id){
 //        return employeeServices.getEmployeeByID(id);
 //    }
+//    @GetMapping("/{employeeID}")
+//    public ResponseEntity<EmployeeDTO> getEmployeeByID(@PathVariable(name = "employeeID") Long id){
+//        Optional<EmployeeDTO> employeeDTO = employeeServices.getEmployeeByID(id);
+//        return employeeDTO.map(employeeDTO1 -> ResponseEntity.ok(employeeDTO1))
+//                .orElse(ResponseEntity.notFound().build());
+//    }
     @GetMapping("/{employeeID}")
     public ResponseEntity<EmployeeDTO> getEmployeeByID(@PathVariable(name = "employeeID") Long id){
         Optional<EmployeeDTO> employeeDTO = employeeServices.getEmployeeByID(id);
         return employeeDTO.map(employeeDTO1 -> ResponseEntity.ok(employeeDTO1))
-                .orElse(ResponseEntity.notFound().build());
+                .orElseThrow(()->new ResourceNotFoundException("Employee not found with the id: " + id));
+               // .orElseThrow(()->new NoSuchElementException("Employee is not found"));
     }
+
+//    @ExceptionHandler(NoSuchElementException.class) //all the NoSuchElementException in the class EmployeeController is handle by this ExceptionHandler as it will catch that exception and pass into the function
+//    public String handleEmployeeNotFound(NoSuchElementException exception){
+//        return "employee not found";
+//    }
+//    @ExceptionHandler(NoSuchElementException.class) //all the NoSuchElementException in the class EmployeeController is handle by this ExceptionHandler as it will catch that exception and pass into the function
+//    public ResponseEntity<String> handleEmployeeNotFound(NoSuchElementException exception){
+//        return new ResponseEntity<>("Employee not found in DB" , HttpStatus.NOT_FOUND);
+//    }
+
 
 //    @GetMapping
 //    public List<EmployeeEntity> getAllEmployees(@RequestParam(name = "sortByName",required = false) String name ){
@@ -87,6 +107,7 @@ public class EmployeeController {
         if(updatedEmployee == null) return ResponseEntity.notFound().build();
         return ResponseEntity.ok(updatedEmployee);
     }
+
 //    @DeleteMapping("/{employeeID}")
 //    public boolean deleteEmployeeById(@PathVariable Long employeeID){
 //        return employeeServices.deleteEmployeeById(employeeID);

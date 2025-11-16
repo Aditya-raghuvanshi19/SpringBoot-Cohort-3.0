@@ -55,6 +55,7 @@ public class EmployeeDTO {
     @AssertTrue(message = "Employee must be active")
     private Boolean isActive;
 
-//size is used for string or array
+     //size is used for string or array
     //min max is used for number or integer kind of values
 }
+// if any of this fails it throw run time exception , so  for that we have to create a global exception handler
