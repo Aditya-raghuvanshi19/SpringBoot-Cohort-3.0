@@ -5,6 +5,7 @@ import com.cohort3.week2.springmvcRESTAPI.Week2L_4ServiceLayer.dto.EmployeeDTO;
 import com.cohort3.week2.springmvcRESTAPI.Week2L_4ServiceLayer.entities.EmployeeEntity;
 import com.cohort3.week2.springmvcRESTAPI.Week2L_4ServiceLayer.services.EmployeeServices;
 
+import jakarta.validation.Valid;
 import lombok.RequiredArgsConstructor;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
@@ -66,7 +67,7 @@ public class EmployeeController {
     // in this case lombok creates issue as serializing employeeDTO into JSON by jackson it fails and getting 406 not acceptable output , because jackson not find getter method by lombok  so either use own getter setter(but in this case getting null in the value of response) or config lombok in pom.xml by version
 
     @PostMapping
-    public ResponseEntity<EmployeeDTO> createNewEmployee(@RequestBody EmployeeDTO employeeDTO){  //as we also accept the request body in the form of the DTO from the user as the user do not know what is are the fields actually storing in the DB
+    public ResponseEntity<EmployeeDTO> createNewEmployee(@RequestBody @Valid EmployeeDTO employeeDTO){  //as we also accept the request body in the form of the DTO from the user as the user do not know what is are the fields actually storing in the DB
         EmployeeDTO savedEmployee = employeeServices.createNewEmployee(employeeDTO);
         return new ResponseEntity<>(savedEmployee, HttpStatus.CREATED);
     }
@@ -81,7 +82,7 @@ public class EmployeeController {
 //    }
     //Put - so here if the employee of the particular ID is present then it updates(change) the entire employee by the provided request body , if employee of the ID not present it can not create a new employee of that id. for creating we use post mapping
     @PutMapping("/{employeeID}")
-    public ResponseEntity<EmployeeDTO> updateEmployeeById(@PathVariable Long employeeID , @RequestBody EmployeeDTO employeeDTO){
+    public ResponseEntity<EmployeeDTO> updateEmployeeById(@PathVariable Long employeeID , @RequestBody @Valid EmployeeDTO employeeDTO){
         EmployeeDTO updatedEmployee = employeeServices.updateEmployeeById(employeeID,employeeDTO);
         if(updatedEmployee == null) return ResponseEntity.notFound().build();
         return ResponseEntity.ok(updatedEmployee);
