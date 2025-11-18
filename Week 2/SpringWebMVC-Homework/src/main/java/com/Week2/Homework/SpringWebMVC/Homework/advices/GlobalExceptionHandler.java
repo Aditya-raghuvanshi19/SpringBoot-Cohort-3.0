@@ -8,16 +8,24 @@ import org.springframework.web.bind.annotation.ExceptionHandler;
 import org.springframework.web.bind.annotation.RestControllerAdvice;
 
 import java.util.Arrays;
+import java.util.List;
+import java.util.stream.Collectors;
 
 @RestControllerAdvice
 public class GlobalExceptionHandler {
 
     @ExceptionHandler(MethodArgumentNotValidException.class)
-    public ResponseEntity<ApiResponse<?>> handleInputValidationError (MethodArgumentNotValidException exception){
-        ApiError apiError = ApiError.builder().status(HttpStatus.BAD_REQUEST).error("Input Validation Failed")
-                .subError(Arrays.stream(exception.getSuppressedFields()).toList())
+    public ResponseEntity<ApiResponse<?>> handleInputValidationError (MethodArgumentNotValidException e){
+        List<String> errors = e.getBindingResult()
+                .getAllErrors()
+                .stream()
+                .map(error -> error.getDefaultMessage())
+                .collect(Collectors.toList());
+        ApiError apiError = ApiError.builder()
+                .status(HttpStatus.BAD_REQUEST)
+                .error("Input validation failed")
+                .subError(errors)
                 .build();
-
         return getResponseEntity(apiError);
     }
 

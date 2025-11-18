@@ -2,6 +2,7 @@ package com.Week2.Homework.SpringWebMVC.Homework.controllers;
 
 import com.Week2.Homework.SpringWebMVC.Homework.dto.DepartmentDto;
 import com.Week2.Homework.SpringWebMVC.Homework.services.DepartmentServices;
+import jakarta.validation.Valid;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Controller;
@@ -26,13 +27,13 @@ public class DepartmentController {
     }
 
     @PostMapping
-    public  ResponseEntity<DepartmentDto> saveDepartment(@RequestBody DepartmentDto departmentDto){
+    public  ResponseEntity<DepartmentDto> saveDepartment(@RequestBody @Valid DepartmentDto departmentDto){
         DepartmentDto departmentDto1 = services.saveNewDepartment(departmentDto);
         return new ResponseEntity<>(departmentDto1,HttpStatus.CREATED);
     }
 
     @PutMapping(path = "/{departmentId}")
-    public ResponseEntity<DepartmentDto> updateDepartmentById(@PathVariable Long departmentId , @RequestBody DepartmentDto departmentDto){
+    public ResponseEntity<DepartmentDto> updateDepartmentById(@PathVariable Long departmentId , @RequestBody @Valid DepartmentDto departmentDto){
         DepartmentDto departmentDto1 = services.updateDepartment(departmentId,departmentDto);
         return new ResponseEntity<>(departmentDto1,HttpStatus.OK);
     }
