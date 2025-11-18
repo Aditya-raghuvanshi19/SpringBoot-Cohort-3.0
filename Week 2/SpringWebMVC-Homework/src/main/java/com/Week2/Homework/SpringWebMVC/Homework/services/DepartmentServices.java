@@ -2,6 +2,7 @@ package com.Week2.Homework.SpringWebMVC.Homework.services;
 
 import com.Week2.Homework.SpringWebMVC.Homework.dto.DepartmentDto;
 import com.Week2.Homework.SpringWebMVC.Homework.entity.Department;
+import com.Week2.Homework.SpringWebMVC.Homework.exceptions.ResourceNotFoundException;
 import com.Week2.Homework.SpringWebMVC.Homework.repositories.DepartmentsRepository;
 import org.modelmapper.ModelMapper;
 import org.springframework.stereotype.Service;
@@ -30,14 +31,14 @@ public class DepartmentServices {
     }
     public DepartmentDto getDepartmentById(long departmentId){
         isDepartmentExist(departmentId);
-        Department department= departmentsRepository.findById(departmentId).get();
+        Department department= departmentsRepository.findById(departmentId).orElseThrow(()->new ResourceNotFoundException("Department not found with the id: "+departmentId));
         return modelMapper.map(department,DepartmentDto.class);
 
     }
 
     private boolean isDepartmentExist(Long departmentId){
         boolean exist = departmentsRepository.existsById(departmentId);
-        if(!exist) throw new IllegalArgumentException();
+        if(!exist) throw new ResourceNotFoundException("Department not found with the id: "+departmentId);
         return true;
     }
 
