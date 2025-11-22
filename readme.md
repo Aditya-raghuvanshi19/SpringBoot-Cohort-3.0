@@ -1,4 +1,4 @@
-<h1 align="center">🚀 Spring Boot Cohort 3.0 — Coding Shuttle</h1>
+<h1 align="center">🚀 Spring Boot 0 to 100 Cohort 3.0 — Coding Shuttle</h1>
 
 <p align="center">
   <img src="https://img.shields.io/badge/Spring_Boot-3.3+-brightgreen?logo=springboot&logoColor=white" alt="Spring Boot"/>
@@ -11,7 +11,7 @@
 
 ## 📘 About the Cohort
 
-> **Spring Boot Cohort 3.0** by *Coding Shuttle* is an end-to-end backend development program using **Java + Spring Boot**.  
+> **Spring Boot 0 to 100 Cohort 3.0** by *Coding Shuttle* is an end-to-end backend development program using **Java + Spring Boot**.  
 > The course covers everything from **Spring Core, REST APIs, Security, Microservices, Docker, CI/CD, to Kubernetes**, all with practical, project-based learning.
 
 You will go from **Spring beginner → Advanced backend engineer**, learning to design, build, and deploy enterprise-grade systems.
@@ -130,12 +130,12 @@ You will go from **Spring beginner → Advanced backend engineer**, learning to 
 
 ```bash
 # 1️⃣ Clone the repository
-git clone https://github.com/Aditya-raghuvanshi19/SpringBoot-Cohort-3.0.git
+git clone https://github.com/Aditya-raghuvanshi19/SpringBoot-0-to-100-Cohort-3.0.git
 
 # 2️⃣ Open the project in IntelliJ IDEA or VS Code
 
 # 3️⃣ Configure database in application.properties
-spring.datasource.url=jdbc:mysql://localhost:3306/employeedb
+spring.datasource.url=jdbc:mysql://localhost:3306/
 spring.datasource.username=root
 spring.datasource.password=yourpassword
 

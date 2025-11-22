@@ -5,17 +5,6 @@
   </component>
   <component name="ChangeListManager">
     <list default="true" id="7b9e1020-93ab-4211-85f0-1d7ed8389ac6" name="Changes" comment="">
-      <change afterPath="$PROJECT_DIR$/out/production/Lambda and stream API/.idea/Lambda and stream API.iml" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/out/production/Lambda and stream API/.idea/material_theme_project_new.xml" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/out/production/Lambda and stream API/.idea/misc.xml" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/out/production/Lambda and stream API/.idea/modules.xml" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/out/production/Lambda and stream API/.idea/vcs.xml" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/out/production/Lambda and stream API/.idea/workspace.xml" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/out/production/Lambda and stream API/Lambda.class" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/out/production/Lambda and stream API/StreamAPI.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/.idea/Lambda and stream API.iml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/Lambda and stream API.iml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Lambda.java" beforeDir="false" afterPath="$PROJECT_DIR$/Lambda.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/StreamAPI.java" beforeDir="false" afterPath="$PROJECT_DIR$/StreamAPI.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/../Week2L-4ServiceLayer/H2EmployeeDB.mv.db" beforeDir="false" afterPath="$PROJECT_DIR$/../Week2L-4ServiceLayer/H2EmployeeDB.mv.db" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />

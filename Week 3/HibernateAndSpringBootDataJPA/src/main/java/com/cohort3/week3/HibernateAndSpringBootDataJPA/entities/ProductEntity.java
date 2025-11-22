@@ -26,7 +26,7 @@ uniqueConstraints = {
         @Index(name = "sku_indexes",columnList = "sku")
 }
 )
-public class Product {
+public class ProductEntity {
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
